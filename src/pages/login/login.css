@@ -1,0 +1,295 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Oswald|Roboto);
+.error {
+  color: red;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  text-align: center;
+}
+
+.bb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('./fondo.png') !important;
+  font-family: "Roboto", sans-serif;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.logtable {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.logtable-cell {
+  display: table-cell;
+  vertical-align: middle;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.logcontainer {
+  position: relative;
+  width: 600px;
+  margin: 30px auto 0;
+  height: 320px;
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%) !important;
+  top: 50%;
+  margin-top: -160px;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.logcontainer .logbox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.logcontainer .logbox:before, .logcontainer .logbox:after {
+  content: " ";
+  position: absolute;
+  left: 152px;
+  top: 50px;
+  background-color: #2b5876;
+  transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
+  width: 300px;
+  height: 285px;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.logcontainer .logbox:after {
+  background-color: #4e4376;
+  top: -10px;
+  left: 80px;
+  width: 320px;
+  height: 180px;
+}
+
+.logcontainer .logcontainer-forms {
+  position: relative;
+}
+
+.logcontainer .logbtn {
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto;
+  width: 75px;
+  color: #fff;
+  background-color: #0ba360;
+  opacity: 1;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  box-sizing: content-box;
+}
+
+.logcontainer .logbtn:hover {
+  opacity: 0.7;
+}
+
+.logcontainer .logbtn, .logcontainer input {
+  padding: 10px 15px;
+}
+
+.logcontainer input {
+  margin: 0 auto 15px;
+  display: block;
+  width: 220px;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  box-sizing: content-box;
+}
+
+.logcontainer .logcontainer-forms .logcontainer-info {
+  text-align: left;
+  font-size: 0;
+}
+
+.logcontainer .logcontainer-forms .logcontainer-info .loginfo-item {
+  text-align: center;
+  font-size: 16px;
+  width: 300px;
+  height: 320px;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  opacity: 1;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.logcontainer .logcontainer-forms .logcontainer-info .loginfo-item p {
+  font-size: 20px;
+  margin: 20px;
+}
+
+.logcontainer .logcontainer-forms .logcontainer-info .loginfo-item .logbtn {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.logcontainer .logcontainer-forms .logcontainer-info .loginfo-item .logtable-cell {
+  padding-right: 35px;
+}
+
+.logcontainer .logcontainer-forms .logcontainer-info .loginfo-item:nth-child(2) .logtable-cell {
+  padding-left: 35px;
+  padding-right: 0;
+}
+
+.logcontainer .logcontainer-form {
+  overflow: hidden;
+  position: absolute;
+  left: 30px;
+  top: -30px;
+  width: 305px;
+  height: 380px;
+  background-color: #fff;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.logcontainer .logcontainer-form:before {
+  content: "✔";
+  position: absolute;
+  left: 160px;
+  top: -50px;
+  color: #5356ad;
+  font-size: 130px;
+  opacity: 0;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.logcontainer .logcontainer-form .logbtn {
+  position: relative;
+  box-shadow: 0 0 10px 1px #0ba360;
+  margin-top: 30px;
+}
+
+.logcontainer .logform-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.logcontainer .logform-item.logsign-up {
+  position: absolute;
+  left: -100%;
+  opacity: 0;
+}
+
+.logcontainer.loglog-in .logbox:before {
+  position: absolute;
+  left: 180px;
+  top: 62px;
+  height: 265px;
+}
+
+.logcontainer.loglog-in .logbox:after {
+  top: 22px;
+  left: 192px;
+  width: 324px;
+  height: 220px;
+}
+
+.logcontainer.loglog-in .logcontainer-form {
+  left: 265px;
+}
+
+.logcontainer.loglog-in .logcontainer-form .logform-item.logsign-up {
+  left: 0;
+  opacity: 1;
+}
+
+.logcontainer.loglog-in .logcontainer-form .logform-item.loglog-in {
+  left: -100%;
+  opacity: 0;
+}
+
+.logcontainer.logactive {
+  width: 260px;
+  height: 140px;
+  margin-top: -70px;
+}
+
+.logcontainer.logactive .logcontainer-form {
+  left: 30px;
+  width: 200px;
+  height: 200px;
+}
+
+.logcontainer.logactive .logcontainer-form:before {
+  content: "✔";
+  position: absolute;
+  left: 51px;
+  top: 5px;
+  color: #5356ad;
+  font-size: 130px;
+  opacity: 1;
+}
+
+.logcontainer.logactive input, .logcontainer.logactive .logbtn, .logcontainer.logactive .loginfo-item {
+  display: none;
+  opacity: 0;
+  padding: 0px;
+  margin: 0 auto;
+  height: 0;
+}
+
+.logcontainer.logactive .logform-item {
+  height: 100%;
+}
+
+.logcontainer.logactive .logcontainer-forms .logcontainer-info .loginfo-item {
+  height: 0%;
+  opacity: 0;
+}
+
+.rabbit {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3;
+  fill: #fff;
+}

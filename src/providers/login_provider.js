@@ -1,30 +1,38 @@
-// IMPORTAMOS EL QUERY QUE COMVERTIRA EL CUERPO DEL POST PARA ENVIARLO POR AXIOS
-import qs from 'querystring';
 import axios from 'axios';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
-// DATOS DE INICIO DE SESION CON SUCURSAL
+class LoginProviders {
 
-async function loginProvider  (pws, uname) {
-    const cas = {
-        PASS: pws,
-        USER: uname,
-        centroAsistencial: 822,
-        opt: 0,
-        upd: 'indexCas',
+    static registrarUsuario = async (user) => {
+        const usuario = await axios({
+            method: 'post',
+            url: 'https://us-central1-sistema-ventas-dde3f.cloudfunctions.net/crearUsuario',
+            data: user
+        });
+        return usuario;
     }
 
-    const resp = await axios.post('/explotacionDatos/servlet/Index',
-        qs.stringify(cas),
-        {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            withCredentials: true,
+    static ingresarUsuario = async (nameuser, password) => {
 
-        }).catch(function (error) {
-            // CARGA EL ERROR
-        });
-    console.log(resp);
+        const db = firebase.firestore().collection('usuarios');
+        const usuario = await db.doc(nameuser).get();
+
+        if (usuario.exists) {
+            const email = usuario.data().email;
+            let err = '';
+            await firebase.auth().signInWithEmailAndPassword(email, password).catch(error => {
+                err = error.code;
+            });
+            if (err === '') {
+                return;
+            } else {
+                return err;
+            }
+        }
+        return 'usuario';
+    }
 }
 
-export default loginProvider;
+export default LoginProviders;
