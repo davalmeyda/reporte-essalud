@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // DATOS DE INICIO DE SESION CON SUCURSAL
 
-async function loginProvider  (pws, uname) {
+async function loginProvider(pws, uname) {
     const cas = {
         PASS: pws,
         USER: uname,

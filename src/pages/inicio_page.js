@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
+// BARRAS
 import CharsCompraVenta from './bloques/chars_bloque';
+// IMPORTAR PROVIDERS
+import AdmisionProvider from '../providers/adminision_provider';
+import TimelineBloque from './bloques/timeline_bloque';
 
 class InicioPage extends Component {
     state = {
-
+        citasPorServicios: [],
+        programacionMedicos: [],       
     }
+
+    admisionProvider = new AdmisionProvider();
+
+    gadgetCitasPorServicios = async () => {
+        let fecha = new Date(Date.now()).toLocaleDateString();
+        this.setState({
+            citasPorServicios: await this.admisionProvider.citasPorServicios(fecha, fecha),
+        });
+        console.log(this.state.citasPorServicios);
+    }
+    
+    cont = true;
+
     render() {
+        if (this.cont === true) {
+            this.gadgetCitasPorServicios();            
+            this.cont = false;
+        }
         return (
             <div className="app-main__inner">
                 <div className="app-page-title">
@@ -24,67 +46,122 @@ class InicioPage extends Component {
                 </div>
                 <div className="row">
                     {/* ETIQUETAS */}
-                    <div className="col-md-6 col-xl-4">
+                    <div className="col-md-6 col-xl-3">
                         <div className="card mb-3 widget-content bg-midnight-bloom">
                             <div className="widget-content-wrapper text-white">
                                 <div className="widget-content-left">
-                                    <div className="widget-numbers text-white numero-wid"><span><i className="metismenu-icon fa fa-cubes" /></span></div>
+                                    <div className="widget-numbers text-white numero-wid"><span>
+                                        {
+                                            this.admisionProvider.suma(this.state.citasPorServicios, 'VOLUNTARIAS')
+                                        }
+                                    </span></div>
                                 </div>
                                 <div className="widget-content-right margin-left-20">
-                                    <div className="widget-heading">INVENTARIO NETO</div>
-                                    <div className="widget-subheading">S/. 450,354,356.40</div>
+                                    <div className="widget-heading">CITAS VOLUNTARIAS</div>
                                     <div className="divider divider-per"></div>
-                                    <div className="widget-subheading">Productos en Stock: 25</div>
+                                    <div className="widget-subheading">
+                                        {
+                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'VOLUNTARIAS')
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-6 col-xl-4">
+                    <div className="col-md-6 col-xl-3">
                         <div className="card mb-3 widget-content bg-arielle-smile">
                             <div className="widget-content-wrapper text-white">
                                 <div className="widget-content-left">
-                                    <div className="widget-numbers text-white numero-wid"><span><i className="metismenu-icon fa fa-shopping-bag" /></span></div>
+                                    <div className="widget-numbers text-white numero-wid"><span>
+                                        {
+                                            this.admisionProvider.suma(this.state.citasPorServicios, 'RECITAS')
+                                        }
+                                    </span></div>
                                 </div>
                                 <div className="widget-content-right margin-left-20">
-                                    <div className="widget-heading">VENTAS 2019</div>
-                                    <div className="widget-subheading">S/. 354,356.40</div>
+                                    <div className="widget-heading">RECITAS</div>
+                                    <div className="widget-subheading">
+                                    </div>
                                     <div className="divider divider-per"></div>
-                                    <div className="widget-subheading">Facturas emitidas: 28</div>
+                                    <div className="widget-subheading">
+                                        {
+                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'RECITAS')
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-6 col-xl-4">
+                    <div className="col-md-6 col-xl-3">
                         <div className="card mb-3 widget-content bg-grow-early">
                             <div className="widget-content-wrapper text-white">
                                 <div className="widget-content-left">
-                                    <div className="widget-numbers text-white numero-wid"><span><i className="metismenu-icon fa fa-shopping-cart" /></span></div>
+                                    <div className="widget-numbers text-white numero-wid"><span>
+                                        {
+                                            this.admisionProvider.suma(this.state.citasPorServicios, 'INTERCONSULTAS')
+                                        }
+                                    </span></div>
                                 </div>
                                 <div className="widget-content-right margin-left-20">
-                                    <div className="widget-heading">COMPRAS 2019</div>
-                                    <div className="widget-subheading">S/. 185,354,356.40</div>
+                                    <div className="widget-heading">INTERCONSULTAS</div>
                                     <div className="divider divider-per"></div>
-                                    <div className="widget-subheading">Compras realizadas: 505</div>
+                                    <div className="widget-subheading">
+                                        {
+                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'INTERCONSULTAS')
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="d-xl-none d-lg-block col-md-6 col-xl-4">
+                    <div className="col-md-6 col-xl-3">
                         <div className="card mb-3 widget-content bg-premium-dark">
                             <div className="widget-content-wrapper text-white">
                                 <div className="widget-content-left">
-                                    <div className="widget-numbers text-warning"><span>1896</span></div>
+                                    <div className="widget-numbers text-white numero-wid"><span>
+                                        {
+                                            this.admisionProvider.suma(this.state.citasPorServicios, 'ESSAENLINEA')
+                                        }
+                                    </span></div>
                                 </div>
                                 <div className="widget-content-right margin-left-20">
-                                    <div className="widget-heading">CLIENTES</div>
-                                    <div className="widget-subheading">N° 5087</div>
+                                    <div className="widget-heading">ESSALUD EN LINEA</div>
                                     <div className="divider divider-per"></div>
-                                    <div className="widget-subheading">Clientes nuevos: 12</div>
+                                    <div className="widget-subheading">
+                                        {
+                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'ESSAENLINEA')
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {/* --------- */}
+                </div>
+                <div className="row">
+                    <div className="col-md-12 col-lg-12">
+                        <div className="mb-3 card">
+                            <div className="card-header-tab card-header-tab-animation card-header">
+                                <div className="card-header-title">
+                                    <i className="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    Programacion de Médicos Del dia
+                                </div>
+                            </div>
+                            <div className="card-body">
+                                <div className="tab-content">
+                                    <div className="tab-pane fade show active" id="tabs-eg-77">
+                                        <div className="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div className="widget-chat-wrapper-outer">
+                                                <div className="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
+                                                    <TimelineBloque></TimelineBloque>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col-md-12 col-lg-6">
@@ -393,12 +470,12 @@ class InicioPage extends Component {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="main-card mb-3 card">
-                            <div className="card-header">Usuarios Activos                                
+                            <div className="card-header">Usuarios Activos
                             </div>
                             <div className="table-responsive">
                                 <table className="align-middle mb-0 table table-borderless table-striped table-hover">

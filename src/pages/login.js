@@ -22,7 +22,7 @@ class LoginPage extends Component {
 
     iniciarsesion = (event) => {
         event.preventDefault();
-        loginProvider(this.state.pws, this.state.uname);        
+        loginProvider(this.state.pws, this.state.uname);
     }
 
     render() {

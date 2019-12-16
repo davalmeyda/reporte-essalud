@@ -49,13 +49,13 @@ class LoginPage extends Component {
             } else if (resultado === 'usuario') {
                 error = 'Usuario no Valido';
             }
-            if (error !== '' || resultado === "auth/too-many-requests") {
+            if (error !== '' || resultado === "auth/too-many-requests") {                
                 this.setState({
                     errorRegistro: error,
                     show: 'logcontainer',
                     disabled: false,
                 });
-            }
+            }            
         });
     }
 

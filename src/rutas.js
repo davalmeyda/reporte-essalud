@@ -18,6 +18,9 @@ import SiderBarBloque from './pages/bloques/siderbar_bloque';
 import InicioPage from './pages/inicio_page';
 import FooterBloque from './pages/bloques/footer_bloque';
 
+
+import LoginProviders from './providers/login_provider';
+
 // IMPORTAR COOKIE
 import cookie from 'react-cookies';
 
@@ -51,7 +54,12 @@ class Rutas extends Component {
         this.guardarColor(this.referenciaHeader.className, this.referenciaSlider.className);
     }
 
+    carga = async () => {
+        await LoginProviders.sesionExplota('Khronos92', '47813783');
+    }
+
     render() {
+        this.carga();
         if (this.props.user) {
             return (
                 <BrowserRouter>

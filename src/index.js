@@ -21,7 +21,7 @@ firebase.initializeApp({
     appId: "1:1087202934624:web:d0a8d90423442838"
 });
 
-class App extends Component {
+class App extends Component {    
 
     state = {
         user: null,
