@@ -62,17 +62,21 @@ export default class Gantt extends Component {
   }
 
   componentDidUpdate() {
-    gantt.render();    
+    gantt.render();
   }
 
-  admisionProvider = new AdmisionProvider(); 
+  admisionProvider = new AdmisionProvider();
 
   async componentDidMount() {
     gantt.config.xml_date = "%Y-%m-%d %H:%i";
     // CONFIGURAR EL PASO EN HORAS
     gantt.config.duration_unit = "hour";
     gantt.config.duration_step = 1;
+    // SOLO LECTURA
+    gantt.config.readonly = true;
+    // gantt.config.sort = true; 
     // CONFIGURAR COLUMNAS
+    gantt.config.date_scale = "%F, %Y";
     gantt.config.columns = [
       { name: "text", label: "SERVICIOS", width: "300", tree: true },
     ];
@@ -83,6 +87,8 @@ export default class Gantt extends Component {
     gantt.init(this.ganttContainer);
     this.initGanttDataProcessor();
     gantt.parse(ttt);
+    // ORDENAR COLUMNAS
+    gantt.sort("text", false);
   }
 
   componentWillUnmount() {

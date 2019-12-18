@@ -29,6 +29,7 @@ class Rutas extends Component {
     state = {
         colorHeader: cookie.load('colorHeader') == null ? "app-header header-shadow" : cookie.load('colorHeader'),
         colorSlider: cookie.load('colorSlider') == null ? "app-sidebar sidebar-shadow" : cookie.load('colorSlider'),
+        aaa: "app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header",
     }
 
     guardarColor = (colorHeader, colorSlider) => {
@@ -58,12 +59,22 @@ class Rutas extends Component {
         await LoginProviders.sesionExplota('Khronos92', '47813783');
     }
 
+    componentWillMount(){
+        setTimeout(()=>{
+            this.setState({
+                aaa: "app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar",
+            })
+            
+        }, 1000)
+       
+    }
+
     render() {
         this.carga();
         if (this.props.user) {
             return (
                 <BrowserRouter>
-                    <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+                    <div className={this.state.aaa}>
                         <HeaderBloque referencia={this.refHeader} color={this.state.colorHeader} user={this.props.user}></HeaderBloque>
                         <ConfigBloque accion={this.ddd}></ConfigBloque>
                         <div className='app-main'>

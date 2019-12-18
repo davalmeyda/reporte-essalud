@@ -15,6 +15,24 @@ class AdmisionProvider {
         return suma;
     }
 
+    suma2 = (lista) => {
+        let suma = 0;
+        lista.forEach(d => {
+            if (d['ESTADO_CITA'] === 'ATENDIDA') {
+                suma += 1;
+            }
+        });
+        return suma;
+    }
+
+    suma3 = (lista) => {
+        let suma = 0;
+        lista.forEach(d => {           
+                suma += 1;           
+        });
+        return suma;
+    }
+
     mayor = (lista, columna, ref) => {
         let r = 0;
         let mayor = "";
@@ -25,17 +43,7 @@ class AdmisionProvider {
             }
         });
         return mayor;
-    }
-
-    fechaMayor = (lista, columna, fecha) => {
-
-        // let fechamayor = "";
-        // lista.forEach(d=>{
-        //     if(d[HOR_INICIO]<)
-        // });
-
-
-    }
+    }  
 
     _traerdatos = async (parametros, url) => {
         const resp = await axios.post(url,
@@ -67,6 +75,22 @@ class AdmisionProvider {
         return data;
     }
 
+    pacientesCitados = async (fechaFin, fechaInicio) => {
+        const url = 'explotacionDatos/servlet/CtrlControl?opt=adm116_xls';
+        const parametros = {
+            CAS: 822,
+            ORIGEN: 2,
+            fechaFin,
+            fechaInicio,
+            formatoArchivo: 'xls',
+            servicio: '00',
+            subactividad: '00',
+            tipoDocumento: '00',
+            actividad: '00',
+        }
+        return this._traerdatos(parametros, url);
+    }
+
     citasPorServicios = async (fechaFin, fechaInicio) => {
         const url = '/explotacionDatos/servlet/CtrlControl?opt=adm13_xls';
         const parametros = {
@@ -94,15 +118,87 @@ class AdmisionProvider {
         return this._traerdatos(parametros, url);
     }
 
+    gadgetPacientesCitados = async () => {
+
+        let fecha = new Date(Date.now()).toLocaleDateString();
+        // let fecha = '17/12/2019';
+
+        // PRUEBAS CON PROGRAMACION        
+        const citados = await this.pacientesCitados(fecha, fecha);
+
+        // ELIMINAMOS LA ULTIMA FILA
+        citados.splice(citados.length - 1, 1);
+        // ORDENAMOS LA INFORMACION 
+        citados.sort((a, b) => {
+            if (a.SERVICIO > b.SERVICIO) {
+                return 1;
+            }
+            if (a.SERVICIO < b.SERVICIO) {
+                return -1;
+            }
+            // SI SON IGUALES
+            return 0;
+
+        });
+        console.log(citados);
+
+        // SEPARAMOS POR CONSULTORIOS
+        const dataAreas = [];
+        let servicios = [];
+        let servicio = "";
+        let inicial = true;
+        citados.forEach((x, i) => {
+            // CONVERTIMOS LAS HORAS A ENTEROS PARA MANIPULARLO MEJOR           
+            if (x['SERVICIO'] === servicio) {
+                servicios.push(x);
+            } else {
+                if (inicial) {
+                    servicio = x['SERVICIO'];
+                    servicios.push(x);
+                    inicial = false;
+                } else {
+                    const ss = servicios
+                    dataAreas.push(ss);
+                    servicios = [];
+                    servicio = x['SERVICIO'];
+                    servicios.push(x);
+                }
+            }
+            if (i === citados.length - 1) {
+                const ss = servicios
+                dataAreas.push(ss);
+            }
+        });
+        return dataAreas;
+    }
+
+
     gadgetProgramacionMedicos = async () => {
 
         let fecha = new Date(Date.now()).toLocaleDateString();
+        const fff = new Date();
+
+        let day = fff.getDate()
+        let month = fff.getMonth() + 1
+        let year = fff.getFullYear()
 
         // PRUEBAS CON PROGRAMACION        
         const programacion = await this.programacionMedicos(fecha, fecha);
 
         // ELIMINAMOS LA ULTIMA FILA
         programacion.splice(programacion.length - 1, 1);
+        // ORDENAMOS LA INFORMACION 
+        programacion.sort((a, b) => {
+            if (a.SERVICIO > b.SERVICIO) {
+                return 1;
+            }
+            if (a.SERVICIO < b.SERVICIO) {
+                return -1;
+            }
+            // SI SON IGUALES
+            return 0;
+
+        });
         console.log(programacion);
 
         // SEPARAMOS POR CONSULTORIOS Y CONVERTIMOS LAS HORAS
@@ -115,7 +211,6 @@ class AdmisionProvider {
             x['HOR_INICIO'] = parseInt(x['HOR_INICIO'].split(':')[0]);
             x['HOR_FIN'] = parseInt(x['HOR_FIN'].split(':')[0]);
             if (x['SERVICIO'] === servicio && x['ESTADO_PROGRAMACION'] === 'APROBADA') {
-                console.log(x['ESTADO_PROGRAMACION']);
                 servicios.push(x);
             } else {
                 if (inicial && x['ESTADO_PROGRAMACION'] === 'APROBADA') {
@@ -138,28 +233,68 @@ class AdmisionProvider {
 
         console.log(dataAreas);
 
-        // TOMAMOS MAYOR Y EL MENOR DE LAS HORAS
+        // ORDENAMOS MAYOR Y EL MENOR DE LAS HORAS
         dataAreas.forEach(x => {
             x.sort((a, b) => a['HOR_INICIO'] - b['HOR_INICIO']);
         });
 
-
-
-        const data1 = dataAreas.map((x, i) => {
+        let index;
+        let parent;
+        const data1 = [];
+        let color = '#28a745';
+        // const colores = ['green', 'red', 'blue'];
+        dataAreas.forEach((x, i) => {
             let item;
-            // inicio        
-            item = {
-                id: (i + 1) * 15,
-                text: x[0]['SERVICIO'],
-                start_date: `2019-12-16 ${x[0]['HOR_INICIO']}:00`,
-                duration: x[x.length - 1]['HOR_FIN'] - x[0]['HOR_INICIO'],
-                open: false,
-            }
-            return item;
+            let item1;
+            let inicio = false;
+            // inicio
+
+            const mayor = this.mayor(x, 'HOR_FIN', 'HOR_FIN');
+
+            x.forEach((xx, ii) => {
+                index = (i + 1) * 100 + ii;
+
+
+                if (ii === 0) {
+                    parent = index;
+                    // color = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+                    item = {
+                        id: index,
+                        text: x[0]['SERVICIO'],
+                        start_date: `${year}-${month}-${day} ${x[0]['HOR_INICIO']}:00`,
+                        duration: mayor - x[0]['HOR_INICIO'],
+                        open: false,
+                        color,
+                    }
+                    item1 = {
+                        id: index + 1,
+                        text: xx['PROFESIONAL'],
+                        start_date: `${year}-${month}-${day} ${xx['HOR_INICIO']}:00`,
+                        duration: xx['HOR_FIN'] - xx['HOR_INICIO'],
+                        parent: parent,
+                        color,
+                    }
+                    inicio = true;
+                } else {
+                    item = {
+                        id: index + 1,
+                        text: xx['PROFESIONAL'],
+                        start_date: `${year}-${month}-${day} ${xx['HOR_INICIO']}:00`,
+                        duration: xx['HOR_FIN'] - xx['HOR_INICIO'],
+                        parent: parent,
+                        color,
+                    }
+                    inicio = false;
+                }
+                data1.push(item);
+                if (inicio) {
+                    data1.push(item1);
+                }
+            });
         });
 
-       
 
+        console.log(data1);
         return data1;
     }
 

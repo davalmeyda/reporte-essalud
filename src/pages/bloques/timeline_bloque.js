@@ -40,20 +40,20 @@ class TimeLineBloque extends Component {
     });
   }
 
+
   render() {
-    const { currentZoom, messages } = this.state;   
-   
+    const { currentZoom, messages } = this.state;
+
     return (
       <div>
-        <div className="zoom-bar">
+        {/* <div className="zoom-bar">
           <Toolbar
             zoom={currentZoom}
             onZoomChange={this.handleZoomChange}
           />
-        </div>
+        </div> */}
         <div className="gantt-container">
           <Gantt
-            
             zoom={currentZoom}
             onDataUpdated={this.logDataUpdate}
           />

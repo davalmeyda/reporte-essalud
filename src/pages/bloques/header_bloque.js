@@ -32,7 +32,8 @@ class HeaderBloque extends Component {
         return (
             <div ref={this.refHeader} className={this.props.color}>
                 <div className="app-header__logo">
-                    <div className="logo-src" />
+                    {/* <div className="logo-src" /> */}
+                    {/* <div className="widget-subheading logoIpress">IPRESS SAN CARLOS</div> */}
                     <div className="header__pane ml-auto">
                         <div>
                             <button type="button" className="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
