@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-// BARRAS
-import CharsCompraVenta from './bloques/chars_bloque';
 // IMPORTAR PROVIDERS
 import AdmisionProvider from '../providers/adminision_provider';
 import TimelineBloque from './bloques/timeline_bloque';
+
+// PDF
+import { PDFReader } from 'reactjs-pdf-reader';
 
 class InicioPage extends Component {
     state = {
         citasPorServicios: [],
         pacientesCitados: [],
+        pdf: '',
     }
 
     admisionProvider = new AdmisionProvider();
@@ -29,6 +31,21 @@ class InicioPage extends Component {
 
     }
 
+    obtenerPDF = async () => {
+
+        let base64data;
+        let data = '';
+        const blob = await this.admisionProvider.obtenerPDFDiferimiento();
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+            base64data = reader.result;
+            data = base64data.split(',')[1];
+            this.setState({
+                pdf: data,
+            });
+        }
+    }
 
     segmento = () => {
 
@@ -88,6 +105,7 @@ class InicioPage extends Component {
         if (this.cont === true) {
             this.gadgetCitasPorServicios();
             this.gadgetPacientesCitados();
+            this.obtenerPDF();
             this.cont = false;
         }
         return (
@@ -236,6 +254,32 @@ class InicioPage extends Component {
                         this.segmento()
                     }
                 </div>
+
+                <div className="row">
+                    <div className="col-md-12 col-lg-12">
+                        <div className="mb-3 card">                            
+                            <div className="card-body">
+                                <div className="tab-content">
+                                    <div className="tab-pane fade show active" id="tabs-eg-77">
+                                        <div className="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div className="widget-chat-wrapper-outer">
+                                                <div className="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
+                                                    {/* CONTENIDO */}
+                                                    {this.state.pdf === '' ? <div></div> : (
+                                                        <div style={{ overflow: 'scroll', height: 600 }}>
+                                                            <PDFReader scale={1.3} data={atob(this.state.pdf)} />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         );
     }

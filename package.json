@@ -12,12 +12,14 @@
     "dhtmlx-gantt": "^6.3.2",
     "firebase": "^7.5.2",
     "papaparse": "^5.1.0",
+    "pdf-viewer-reactjs": "^2.0.0",
     "react": "^16.12.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.12.0",
     "react-load-script": "0.0.6",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "reactjs-pdf-reader": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",

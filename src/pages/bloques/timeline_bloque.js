@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Gantt from './Gantt';
-import Toolbar from './Toolbar';
-
 
 // static data for our gantt chart
 
@@ -42,7 +40,7 @@ class TimeLineBloque extends Component {
 
 
   render() {
-    const { currentZoom, messages } = this.state;
+    const { currentZoom } = this.state;
 
     return (
       <div>

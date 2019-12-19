@@ -27,8 +27,8 @@ class AdmisionProvider {
 
     suma3 = (lista) => {
         let suma = 0;
-        lista.forEach(d => {           
-                suma += 1;           
+        lista.forEach(d => {
+            suma += 1;
         });
         return suma;
     }
@@ -43,9 +43,32 @@ class AdmisionProvider {
             }
         });
         return mayor;
-    }  
+    }
 
-    _traerdatos = async (parametros, url) => {
+    obtenerPDFDiferimiento = async () => {
+        const url = '/sgssgxreport/servlet/orptdifercitas?2,822,01,,,,20191201,20191218,1';
+        return await this._traerdatosSGSS('a', url);
+    }
+
+    _traerdatosSGSS = async (parametros, url) => {
+        const resp = await axios.get(url,
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                withCredentials: true,
+                responseType: 'blob',
+            }).catch(function (error) {
+                console.log(error);
+            });
+        const blob = resp.data;
+        console.log(blob);
+        
+        return blob;
+    }
+
+
+    _traerdatosExplota = async (parametros, url) => {
         const resp = await axios.post(url,
             qs.stringify(parametros), {
             headers: {
@@ -76,7 +99,7 @@ class AdmisionProvider {
     }
 
     pacientesCitados = async (fechaFin, fechaInicio) => {
-        const url = 'explotacionDatos/servlet/CtrlControl?opt=adm116_xls';
+        const url = '/explotacionDatos/servlet/CtrlControl?opt=adm116_xls';
         const parametros = {
             CAS: 822,
             ORIGEN: 2,
@@ -88,7 +111,7 @@ class AdmisionProvider {
             tipoDocumento: '00',
             actividad: '00',
         }
-        return this._traerdatos(parametros, url);
+        return this._traerdatosExplota(parametros, url);
     }
 
     citasPorServicios = async (fechaFin, fechaInicio) => {
@@ -101,7 +124,7 @@ class AdmisionProvider {
             formatoArchivo: 'xls',
             servicio: '00',
         }
-        return this._traerdatos(parametros, url);
+        return this._traerdatosExplota(parametros, url);
     }
 
     programacionMedicos = async (fechaFin, fechaInicio) => {
@@ -115,7 +138,7 @@ class AdmisionProvider {
             formatoArchivo: 'xls',
             servicio: '00',
         }
-        return this._traerdatos(parametros, url);
+        return this._traerdatosExplota(parametros, url);
     }
 
     gadgetPacientesCitados = async () => {

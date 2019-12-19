@@ -31,6 +31,22 @@ class LoginProviders {
         console.log(resp);
     }
 
+    static sesionReportesSGSS = async ()=>{
+           
+        const resp = await axios.get('/sgssgxreport/servlet/hctrlmenu?2,822,47813783,V0000000000',            
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                withCredentials: true,
+    
+            }).catch(function (error) {
+                // CARGA EL ERROR
+                console.log(error);
+            });
+        console.log(resp);
+    }
+
     static registrarUsuario = async (user) => {
         const usuario = await axios({
             method: 'post',

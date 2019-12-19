@@ -57,20 +57,20 @@ class Rutas extends Component {
 
     carga = async () => {
         await LoginProviders.sesionExplota('Khronos92', '47813783');
+        await LoginProviders.sesionReportesSGSS();
     }
 
     componentWillMount(){
+        this.carga();
         setTimeout(()=>{
             this.setState({
                 aaa: "app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar",
-            })
-            
-        }, 1000)
+            })            
+        }, 1500)
        
     }
 
-    render() {
-        this.carga();
+    render() {        
         if (this.props.user) {
             return (
                 <BrowserRouter>
