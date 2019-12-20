@@ -63,7 +63,7 @@ class AdmisionProvider {
             });
         const blob = resp.data;
         console.log(blob);
-        
+
         return blob;
     }
 

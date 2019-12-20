@@ -2,7 +2,7 @@
   "name": "estadisticas",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://172.20.0.210:8080",
+  "proxy": "http://192.168.100.3",
   "dependencies": {
     "@nivo/bar": "^0.59.2",
     "@testing-library/jest-dom": "^4.2.4",
@@ -12,7 +12,6 @@
     "dhtmlx-gantt": "^6.3.2",
     "firebase": "^7.5.2",
     "papaparse": "^5.1.0",
-    "pdf-viewer-reactjs": "^2.0.0",
     "react": "^16.12.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.12.0",
