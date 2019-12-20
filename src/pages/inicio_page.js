@@ -54,7 +54,7 @@ class InicioPage extends Component {
         const pacientesCitados = this.state.pacientesCitados;
         pacientesCitados.forEach((x, i) => {
             gadget.push(
-                <div key={i} className="col-md-4 col-xl-3">
+                <div key={i} className="col-md-4 col-xl-6">
                     <div className="card mb-3 widget-content">
                         <div className="widget-content-outer">
                             <div className="widget-content-wrapper">
@@ -86,28 +86,31 @@ class InicioPage extends Component {
         });
 
         return (
-            <div className="row">
-                <div className="col-md-12 col-xl-12 ml-3 mb-4 card-header card-title">
+            <div className="col-md-12 col-xl-5">
+                <div className="mb-4 card-header card-title">
                     <div className="card-header-title">
-                        <i className="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
                         CITAS ATENDIDAS EN EL DIA
                         </div>
                 </div>
-                {gadget}
+                <div className="row">
+                    {gadget}
+                </div>
             </div>
         )
     }
-
-
-    cont = true;
-
-    render() {
-        if (this.cont === true) {
+    componentWillMount() {
+        this.gadgetCitasPorServicios();
+        this.gadgetPacientesCitados();        
+        setInterval(() => {
             this.gadgetCitasPorServicios();
             this.gadgetPacientesCitados();
-            this.obtenerPDF();
-            this.cont = false;
-        }
+        }, 100000);
+
+        this.obtenerPDF();
+    }
+
+    render() {
+
         return (
             <div className="app-main__inner">
                 <div className="app-page-title">
@@ -125,10 +128,11 @@ class InicioPage extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-12 col-xl-12 ml-3 mb-4 card-header card-title">
-                        <div className="card-header-title">
-                            <i className="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
-                            CITAS GENERADAS POR ADMISION Y ESSALUD EN LINEA
+                    <div className="col-md-12 col-xl-12">
+                        <div className="mb-4 card-header card-title">
+                            <div className="card-header-title">
+                                CITAS GENERADAS POR ADMISION Y ESSALUD EN LINEA
+                        </div>
                         </div>
                     </div>
                     {/* ETIQUETAS */}
@@ -236,7 +240,7 @@ class InicioPage extends Component {
                             <div className="card-body">
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tabs-eg-77">
-                                        <div className="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                        <div className="card widget-chart widget-chart2 text-left w-100 list-margin">
                                             <div className="widget-chat-wrapper-outer">
                                                 <div className="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
                                                     <TimelineBloque></TimelineBloque>
@@ -249,25 +253,24 @@ class InicioPage extends Component {
                         </div>
                     </div>
                 </div>
-                <div>
+
+
+                <div className="row">
                     {
                         this.segmento()
                     }
-                </div>
-
-                <div className="row">
-                    <div className="col-md-12 col-lg-12">
-                        <div className="mb-3 card">                            
+                    <div className="col-md-12 col-xl-7">
+                        <div className="mb-3 card">
                             <div className="card-body">
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tabs-eg-77">
-                                        <div className="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                        <div className="card widget-chart widget-chart2 text-left w-100 list-margin">
                                             <div className="widget-chat-wrapper-outer">
                                                 <div className="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
                                                     {/* CONTENIDO */}
                                                     {this.state.pdf === '' ? <div></div> : (
-                                                        <div style={{ overflow: 'scroll', height: 600 }}>
-                                                            <PDFReader scale={1.3} data={atob(this.state.pdf)} />
+                                                        <div style={{ overflow: 'hidden', height: 600 }}>
+                                                            <PDFReader scale={1.2} data={atob(this.state.pdf)} />
                                                         </div>
                                                     )}
                                                 </div>
@@ -279,7 +282,6 @@ class InicioPage extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }

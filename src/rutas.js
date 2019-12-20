@@ -62,6 +62,11 @@ class Rutas extends Component {
 
     componentWillMount(){
         this.carga();
+
+        setInterval(() => {
+            this.carga();
+        }, 600000);
+
         setTimeout(()=>{
             this.setState({
                 aaa: "app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar",
