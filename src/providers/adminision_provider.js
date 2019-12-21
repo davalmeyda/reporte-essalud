@@ -67,7 +67,6 @@ class AdmisionProvider {
         return blob;
     }
 
-
     _traerdatosExplota = async (parametros, url) => {
         const resp = await axios.post(url,
             qs.stringify(parametros), {

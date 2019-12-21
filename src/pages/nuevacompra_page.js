@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CharsCompraVenta from './bloques/chars_bloque';
 
 class NuevaCompraPage extends Component {
     state = { 
@@ -9,7 +8,7 @@ class NuevaCompraPage extends Component {
         return ( 
             <div>
                 <h1>Nueva Compra</h1>
-            <CharsCompraVenta></CharsCompraVenta>
+            
             </div>
          );
     }

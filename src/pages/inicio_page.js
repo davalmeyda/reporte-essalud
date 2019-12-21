@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // IMPORTAR PROVIDERS
 import AdmisionProvider from '../providers/adminision_provider';
-import TimelineBloque from './bloques/timeline_bloque';
+import TimelineBloque from './bloques/graficos/timeline/timeline_bloque';
 
 // PDF
 import { PDFReader } from 'reactjs-pdf-reader';
@@ -100,7 +100,7 @@ class InicioPage extends Component {
     }
     componentWillMount() {
         this.gadgetCitasPorServicios();
-        this.gadgetPacientesCitados();        
+        this.gadgetPacientesCitados();
         setInterval(() => {
             this.gadgetCitasPorServicios();
             this.gadgetPacientesCitados();

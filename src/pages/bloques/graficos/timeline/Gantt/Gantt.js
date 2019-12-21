@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { gantt } from 'dhtmlx-gantt';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
-import AdmisionProvider from '../../../providers/adminision_provider';
+import AdmisionProvider from '../../../../../providers/adminision_provider';
 
 export default class Gantt extends Component {
 

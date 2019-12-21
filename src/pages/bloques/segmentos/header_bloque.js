@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+// IMPORTAR COOKIE
+import cookie from 'react-cookies';
+
 class HeaderBloque extends Component {
     state = {
         headerMobile: 'app-header__content',
@@ -11,38 +14,26 @@ class HeaderBloque extends Component {
         user: this.props.user,
     }
 
-    // ABRIR O CERRAR EL DEADER
-    headerMobile = () => {
-        if (this.state.headerMobile === 'app-header__content') {
-            this.setState({
-                headerMobile: 'app-header__content header-mobile-open'
-            });
-        } else {
-            this.setState({
-                headerMobile: 'app-header__content'
-            });
-        }
-    }
-    // ABRIR O CERRAR EL BUSCADOR
-    headerSearch = () => {
-        console.log('abcccc');
-
-    }
-    // EJECUTAR EL BUSCADOR
-    handleBuscar = () => {
-
-    }
-
     // CERRAR SESION
-    salir = () => {
-        firebase.auth().signOut();
+    salir = async () => {
+        cookie.remove('usuario');
+        await firebase.auth().signOut();
+        console.log('salir');
+        window.location.reload();
+    }
+
+    refHeader = React.createRef();
+
+    componentDidMount(){
+        this.props.referencia(this.refHeader);
     }
 
     render() {
         return (
-            <div className="app-header header-shadow">
+            <div ref={this.refHeader} className={this.props.color}>
                 <div className="app-header__logo">
-                    <div className="logo-src" />
+                    {/* <div className="logo-src" /> */}
+                    {/* <div className="widget-subheading logoIpress">IPRESS SAN CARLOS</div> */}
                     <div className="header__pane ml-auto">
                         <div>
                             <button type="button" className="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -64,7 +55,7 @@ class HeaderBloque extends Component {
                 </div>
                 <div className="app-header__menu">
                     <span>
-                        <button onClick={this.headerMobile} type="button" className="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <button type="button" className="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
                             <span className="btn-icon-wrapper">
                                 <i className="fa fa-ellipsis-v fa-w-6" />
                             </span>
@@ -72,14 +63,14 @@ class HeaderBloque extends Component {
                     </span>
                 </div>
                 {/* CONTENIDO DEL HEADER */}
-                <div className={this.state.headerMobile}>
+                <div className='app-header__content'>
                     <div className="app-header-left">
-                        <div className={this.state.headerSearch}>
+                        <div className='search-wrapper'>
                             <div className="input-holder">
                                 <input type="text" className="search-input" placeholder="Escribe para buscar" />
                                 <button className="search-icon"><span /></button>
                             </div>
-                            <button onClick={this.headerSearch} className="close" />
+                            <button className="close" />
                         </div>
                         <ul className="header-menu nav">
                             <li className="nav-item">
@@ -113,6 +104,7 @@ class HeaderBloque extends Component {
                                                 <i className="fa fa-angle-down ml-2 opacity-8" />
                                             </a>
                                             <div tabIndex={-1} role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">
+
                                                 <button type="button" tabIndex={0} className="dropdown-item">Perfil</button>
                                                 <button type="button" tabIndex={0} className="dropdown-item">Configuración</button>
                                                 <div tabIndex={-1} className="dropdown-divider" />
@@ -142,6 +134,8 @@ class HeaderBloque extends Component {
 }
 HeaderBloque.propTypes = {
     user: PropTypes.any,
+    color: PropTypes.string,
+    referencia: PropTypes.func, 
 }
 
 export default HeaderBloque;

@@ -12,11 +12,11 @@ import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 import PropTypes from 'prop-types';
 // PAGINAS
 import NuevaCompraPage from './pages/nuevacompra_page';
-import HeaderBloque from './pages/bloques/header_bloque';
-import ConfigBloque from './pages/bloques/config_bloque';
-import SiderBarBloque from './pages/bloques/siderbar_bloque';
+import HeaderBloque from './pages/bloques/segmentos/header_bloque';
+import ConfigBloque from './pages/bloques/segmentos/config_bloque';
+import SiderBarBloque from './pages/bloques/segmentos/siderbar_bloque';
 import InicioPage from './pages/inicio_page';
-import FooterBloque from './pages/bloques/footer_bloque';
+import FooterBloque from './pages/bloques/segmentos/footer_bloque';
 
 
 import LoginProviders from './providers/login_provider';
