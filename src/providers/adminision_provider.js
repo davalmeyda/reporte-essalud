@@ -322,10 +322,6 @@ class AdmisionProvider {
         console.log(data1);
         return data1;
     }
-
-
-
-
 }
 
 export default AdmisionProvider;
