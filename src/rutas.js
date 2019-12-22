@@ -11,7 +11,7 @@ import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 // PAGINAS
-import NuevaCompraPage from './pages/nuevacompra_page';
+import CarterasPage from './pages/carteras_page';
 import HeaderBloque from './pages/bloques/segmentos/header_bloque';
 import ConfigBloque from './pages/bloques/segmentos/config_bloque';
 import SiderBarBloque from './pages/bloques/segmentos/siderbar_bloque';
@@ -87,7 +87,7 @@ class Rutas extends Component {
                             <div className="app-main__outer">
                                 <Switch>
                                     <Route exact path="/" component={InicioPage}></Route>
-                                    <Route exact path="/nueva-compra" component={NuevaCompraPage}></Route>
+                                    <Route exact path="/Carteras" component={CarterasPage}></Route>
                                     <Redirect to="/"></Redirect>
                                 </Switch>
                                 <FooterBloque></FooterBloque>

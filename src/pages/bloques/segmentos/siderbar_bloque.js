@@ -59,6 +59,15 @@ class SiderBarBloque extends Component {
                                 </Link>
                             </li>
                         </ul>
+                        <ul className="vertical-nav-menu">
+                            <li className="app-sidebar__heading">Estadisticas</li>
+                            <li>
+                                <Link to='/Carteras' className='mm-active'>
+                                    <i className="metismenu-icon pe-7s-rocket" />
+                                    Carteras
+                                </Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

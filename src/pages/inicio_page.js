@@ -35,7 +35,8 @@ class InicioPage extends Component {
 
         let base64data;
         let data = '';
-        const blob = await this.admisionProvider.obtenerPDFDiferimiento();
+        let fecha = new Date(Date.now()).toLocaleDateString();        
+        const blob = await this.admisionProvider.obtenerPDFDiferimiento(fecha);
         var reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = () => {
@@ -105,7 +106,6 @@ class InicioPage extends Component {
             this.gadgetCitasPorServicios();
             this.gadgetPacientesCitados();
         }, 100000);
-
         this.obtenerPDF();
     }
 

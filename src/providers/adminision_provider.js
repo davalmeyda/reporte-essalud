@@ -45,8 +45,11 @@ class AdmisionProvider {
         return mayor;
     }
 
-    obtenerPDFDiferimiento = async () => {
-        const url = '/sgssgxreport/servlet/orptdifercitas?2,822,01,,,,20191201,20191218,1';
+    obtenerPDFDiferimiento = async (fecha) => {
+        const fec = fecha.split('/');
+        const hoy = fec[2] + fec[1] + fec[0];
+        const inicioMes = fec[2] + fec[1] + '01';
+        const url = `/sgssgxreport/servlet/orptdifercitas?2,822,01,,,,${inicioMes},${hoy},1`;
         return await this._traerdatosSGSS('a', url);
     }
 

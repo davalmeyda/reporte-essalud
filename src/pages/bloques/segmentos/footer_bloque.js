@@ -10,7 +10,7 @@ class FooterBloque extends Component {
                 <div className="app-footer">
                     <div className="app-footer__inner">
                         <div className="app-footer-left">
-                        <div className='copy'> Copyright © 2019 Todos los derechos reservados</div>
+                        <div className='copy'> Copyright © 2019 Todos los derechos reservados v. 1.0</div>
                         </div>
                         <div className="app-footer-right">
                         <div className='copy'> Creado por David Almeyda</div>
@@ -18,7 +18,6 @@ class FooterBloque extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-class NuevaCompraPage extends Component {
+class CarterasPage extends Component {
     state = { 
 
      }
     render() { 
         return ( 
             <div>
-                <h1>Nueva Compra</h1>
+                <h1>Carteras</h1>
             
             </div>
          );
     }
 }
  
-export default NuevaCompraPage;
+export default CarterasPage;
