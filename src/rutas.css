@@ -11,6 +11,12 @@
 
 /* MIOS */
 
+.tabla1 {
+    font-weight: normal;
+    text-align: left;
+    white-space: nowrap;
+}
+
 .divider-per {
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;

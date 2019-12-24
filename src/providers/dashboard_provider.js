@@ -1,19 +1,10 @@
+import ConexionesProvider from './conexiones_provider';
+import HerramientasProviders from './herramientas_providers';
 
-// IMPORTAMOS EL QUERY QUE COMVERTIRA EL CUERPO DEL POST PARA ENVIARLO POR AXIOS
-import qs from 'querystring';
-import axios from 'axios';
-// CONVERTIDOR DE CSV A JSON
-import papaparse from 'papaparse';
+class dashboarProvider {
 
-class AdmisionProvider {
-
-    suma = (lista, columna) => {
-        let suma = 0;
-        lista.forEach(d => {
-            suma += parseInt(d[columna]) || 0;
-        });
-        return suma;
-    }
+    conexionesProvider = new ConexionesProvider();
+    herramientasProvider = new HerramientasProviders();
 
     suma2 = (lista) => {
         let suma = 0;
@@ -21,14 +12,6 @@ class AdmisionProvider {
             if (d['ESTADO_CITA'] === 'ATENDIDA') {
                 suma += 1;
             }
-        });
-        return suma;
-    }
-
-    suma3 = (lista) => {
-        let suma = 0;
-        lista.forEach(d => {
-            suma += 1;
         });
         return suma;
     }
@@ -50,54 +33,7 @@ class AdmisionProvider {
         const hoy = fec[2] + fec[1] + fec[0];
         const inicioMes = fec[2] + fec[1] + '01';
         const url = `/sgssgxreport/servlet/orptdifercitas?2,822,01,,,,${inicioMes},${hoy},1`;
-        return await this._traerdatosSGSS('a', url);
-    }
-
-    _traerdatosSGSS = async (parametros, url) => {
-        const resp = await axios.get(url,
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                withCredentials: true,
-                responseType: 'blob',
-            }).catch(function (error) {
-                console.log(error);
-            });
-        const blob = resp.data;
-        console.log(blob);
-
-        return blob;
-    }
-
-    _traerdatosExplota = async (parametros, url) => {
-        const resp = await axios.post(url,
-            qs.stringify(parametros), {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            withCredentials: true,
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-        const txt = resp.data.split("|")[4];
-        console.log(txt);
-
-        const resp1 = await axios.get(`${url}_descarga&fn=${txt}`);
-        // DATA EN BRUTO
-        console.log(resp1.data);
-        // CONVIRTIENDO A JSON
-        const result = papaparse.parse(resp1.data, {
-            delimiter: "|",
-            header: true,
-        });
-        const data = result.data;
-        // ARCHIVO JSON
-        console.log(data);
-
-        return data;
+        return await this.conexionesProvider._traerdatosSGSS('a', url);
     }
 
     pacientesCitados = async (fechaFin, fechaInicio) => {
@@ -113,7 +49,7 @@ class AdmisionProvider {
             tipoDocumento: '00',
             actividad: '00',
         }
-        return this._traerdatosExplota(parametros, url);
+        return this.conexionesProvider._traerdatosExplota(parametros, url);
     }
 
     citasPorServicios = async (fechaFin, fechaInicio) => {
@@ -126,7 +62,7 @@ class AdmisionProvider {
             formatoArchivo: 'xls',
             servicio: '00',
         }
-        return this._traerdatosExplota(parametros, url);
+        return this.conexionesProvider._traerdatosExplota(parametros, url);
     }
 
     programacionMedicos = async (fechaFin, fechaInicio) => {
@@ -140,7 +76,7 @@ class AdmisionProvider {
             formatoArchivo: 'xls',
             servicio: '00',
         }
-        return this._traerdatosExplota(parametros, url);
+        return this.conexionesProvider._traerdatosExplota(parametros, url);
     }
 
     gadgetPacientesCitados = async () => {
@@ -167,33 +103,9 @@ class AdmisionProvider {
         });
         console.log(citados);
 
-        // SEPARAMOS POR CONSULTORIOS
-        const dataAreas = [];
-        let servicios = [];
-        let servicio = "";
-        let inicial = true;
-        citados.forEach((x, i) => {
-            // CONVERTIMOS LAS HORAS A ENTEROS PARA MANIPULARLO MEJOR           
-            if (x['SERVICIO'] === servicio) {
-                servicios.push(x);
-            } else {
-                if (inicial) {
-                    servicio = x['SERVICIO'];
-                    servicios.push(x);
-                    inicial = false;
-                } else {
-                    const ss = servicios
-                    dataAreas.push(ss);
-                    servicios = [];
-                    servicio = x['SERVICIO'];
-                    servicios.push(x);
-                }
-            }
-            if (i === citados.length - 1) {
-                const ss = servicios
-                dataAreas.push(ss);
-            }
-        });
+        // SEPARAMOS POR CONSULTORIOS        
+        const dataAreas = this.herramientasProvider.agruparArrayValorColumna(citados, 'SERVICIO');
+
         return dataAreas;
     }
 
@@ -324,4 +236,4 @@ class AdmisionProvider {
     }
 }
 
-export default AdmisionProvider;
+export default dashboarProvider;

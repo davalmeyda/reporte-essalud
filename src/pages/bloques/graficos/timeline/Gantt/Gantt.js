@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { gantt } from 'dhtmlx-gantt';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
-import AdmisionProvider from '../../../../../providers/adminision_provider';
+import dashboarProvider from '../../../../../providers/dashboard_provider';
 
 export default class Gantt extends Component {
 
@@ -65,7 +65,7 @@ export default class Gantt extends Component {
     gantt.render();
   }
 
-  admisionProvider = new AdmisionProvider();
+  dashboarProvider = new dashboarProvider();
 
   async componentDidMount() {
     gantt.config.xml_date = "%Y-%m-%d %H:%i";
@@ -81,7 +81,7 @@ export default class Gantt extends Component {
       { name: "text", label: "SERVICIOS", width: "300", tree: true },
     ];
     const ttt = {
-      data: await this.admisionProvider.gadgetProgramacionMedicos(),
+      data: await this.dashboarProvider.gadgetProgramacionMedicos(),
     }
     
     gantt.init(this.ganttContainer);

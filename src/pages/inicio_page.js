@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // IMPORTAR PROVIDERS
-import AdmisionProvider from '../providers/adminision_provider';
+import dashboarProvider from '../providers/dashboard_provider';
 import TimelineBloque from './bloques/graficos/timeline/timeline_bloque';
+import HerramientasProviders from '../providers/herramientas_providers';
 
 // PDF
 import { PDFReader } from 'reactjs-pdf-reader';
@@ -13,19 +14,20 @@ class InicioPage extends Component {
         pdf: '',
     }
 
-    admisionProvider = new AdmisionProvider();
+    herramientasProvider = new HerramientasProviders();
+    dashboarProvider = new dashboarProvider();
 
     gadgetCitasPorServicios = async () => {
         let fecha = new Date(Date.now()).toLocaleDateString();
         this.setState({
-            citasPorServicios: await this.admisionProvider.citasPorServicios(fecha, fecha),
+            citasPorServicios: await this.dashboarProvider.citasPorServicios(fecha, fecha),
         });
     }
 
     gadgetPacientesCitados = async () => {
 
         this.setState({
-            pacientesCitados: await this.admisionProvider.gadgetPacientesCitados(),
+            pacientesCitados: await this.dashboarProvider.gadgetPacientesCitados(),
         });
         console.log(this.state.pacientesCitados);
 
@@ -36,7 +38,7 @@ class InicioPage extends Component {
         let base64data;
         let data = '';
         let fecha = new Date(Date.now()).toLocaleDateString();        
-        const blob = await this.admisionProvider.obtenerPDFDiferimiento(fecha);
+        const blob = await this.dashboarProvider.obtenerPDFDiferimiento(fecha);
         var reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = () => {
@@ -52,7 +54,7 @@ class InicioPage extends Component {
 
         const gadget = [];
 
-        const pacientesCitados = this.state.pacientesCitados;
+        const pacientesCitados = this.state.pacientesCitados;        
         pacientesCitados.forEach((x, i) => {
             gadget.push(
                 <div key={i} className="col-md-4 col-xl-6">
@@ -68,14 +70,14 @@ class InicioPage extends Component {
                                     <div className="widget-subheading">
                                         De un total de
                                         {
-                                            " " + this.admisionProvider.suma3(x)
+                                            " " + x.length
                                         }
                                     </div>
                                 </div>
                                 <div className="widget-content-right">
                                     <div className="widget-numbers text-success m-2">
                                         {
-                                            this.admisionProvider.suma2(x)
+                                            this.dashboarProvider.suma2(x)
                                         }
                                     </div>
                                 </div>
@@ -142,7 +144,7 @@ class InicioPage extends Component {
                                 <div className="widget-content-left">
                                     <div className="widget-numbers text-white numero-wid"><span>
                                         {
-                                            this.admisionProvider.suma(this.state.citasPorServicios, 'VOLUNTARIAS')
+                                            this.herramientasProvider.sumaValorColumna(this.state.citasPorServicios, 'VOLUNTARIAS')
                                         }
                                     </span></div>
                                 </div>
@@ -151,7 +153,7 @@ class InicioPage extends Component {
                                     <div className="divider divider-per"></div>
                                     <div className="widget-subheading">
                                         {
-                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'VOLUNTARIAS')
+                                            this.dashboarProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'VOLUNTARIAS')
                                         }
                                     </div>
                                 </div>
@@ -164,7 +166,7 @@ class InicioPage extends Component {
                                 <div className="widget-content-left">
                                     <div className="widget-numbers text-white numero-wid"><span>
                                         {
-                                            this.admisionProvider.suma(this.state.citasPorServicios, 'RECITAS')
+                                            this.herramientasProvider.sumaValorColumna(this.state.citasPorServicios, 'RECITAS')
                                         }
                                     </span></div>
                                 </div>
@@ -175,7 +177,7 @@ class InicioPage extends Component {
                                     <div className="divider divider-per"></div>
                                     <div className="widget-subheading">
                                         {
-                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'RECITAS')
+                                            this.dashboarProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'RECITAS')
                                         }
                                     </div>
                                 </div>
@@ -188,7 +190,7 @@ class InicioPage extends Component {
                                 <div className="widget-content-left">
                                     <div className="widget-numbers text-white numero-wid"><span>
                                         {
-                                            this.admisionProvider.suma(this.state.citasPorServicios, 'INTERCONSULTAS')
+                                            this.herramientasProvider.sumaValorColumna(this.state.citasPorServicios, 'INTERCONSULTAS')
                                         }
                                     </span></div>
                                 </div>
@@ -197,7 +199,7 @@ class InicioPage extends Component {
                                     <div className="divider divider-per"></div>
                                     <div className="widget-subheading">
                                         {
-                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'INTERCONSULTAS')
+                                            this.dashboarProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'INTERCONSULTAS')
                                         }
                                     </div>
                                 </div>
@@ -210,7 +212,7 @@ class InicioPage extends Component {
                                 <div className="widget-content-left">
                                     <div className="widget-numbers text-white numero-wid"><span>
                                         {
-                                            this.admisionProvider.suma(this.state.citasPorServicios, 'ESSAENLINEA')
+                                            this.herramientasProvider.sumaValorColumna(this.state.citasPorServicios, 'ESSAENLINEA')
                                         }
                                     </span></div>
                                 </div>
@@ -219,7 +221,7 @@ class InicioPage extends Component {
                                     <div className="divider divider-per"></div>
                                     <div className="widget-subheading">
                                         {
-                                            this.admisionProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'ESSAENLINEA')
+                                            this.dashboarProvider.mayor(this.state.citasPorServicios, 'SERVICIO', 'ESSAENLINEA')
                                         }
                                     </div>
                                 </div>
@@ -253,8 +255,6 @@ class InicioPage extends Component {
                         </div>
                     </div>
                 </div>
-
-
                 <div className="row">
                     {
                         this.segmento()
