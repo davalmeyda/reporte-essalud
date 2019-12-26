@@ -144,6 +144,7 @@ class CarterasProviders {
                 d.forEach(x => {
                     plantilla5A12.documento = x['NUM_DOC'];
                     plantilla5A12.nombre = x['APELLNOMBRE'];
+                    plantilla5A12.edad = x['EDAD'];
                     plantilla5A12['FECHA_APERTURA'] = x['FECHA_APERTURA'];
                     plantilla5A12[(x['COD_PROC'] + '-' + x['CONTROL'])]  = 'ok';
                     plantilla5A12[(x['COD_PROC'] + '-' + x['CONTROL'] + '-F')]  = x['FECHORAREG'];

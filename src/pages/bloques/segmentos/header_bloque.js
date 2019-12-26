@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+import { Link } from 'react-router-dom'
+
 // IMPORTAR COOKIE
 import cookie from 'react-cookies';
 
@@ -24,7 +26,11 @@ class HeaderBloque extends Component {
 
     refHeader = React.createRef();
 
-    componentDidMount(){
+    // configuracion = () => {
+        
+    // }
+
+    componentDidMount() {
         this.props.referencia(this.refHeader);
     }
 
@@ -106,7 +112,7 @@ class HeaderBloque extends Component {
                                             <div tabIndex={-1} role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">
 
                                                 <button type="button" tabIndex={0} className="dropdown-item">Perfil</button>
-                                                <button type="button" tabIndex={0} className="dropdown-item">Configuración</button>
+                                                <Link to='/Configuracion' type="button" tabIndex={0} className="dropdown-item">Configuración</Link>
                                                 <div tabIndex={-1} className="dropdown-divider" />
                                                 <button onClick={this.salir} type="button" tabIndex={0} className="dropdown-item">Salir</button>
                                             </div>
@@ -135,7 +141,7 @@ class HeaderBloque extends Component {
 HeaderBloque.propTypes = {
     user: PropTypes.any,
     color: PropTypes.string,
-    referencia: PropTypes.func, 
+    referencia: PropTypes.func,
 }
 
 export default HeaderBloque;

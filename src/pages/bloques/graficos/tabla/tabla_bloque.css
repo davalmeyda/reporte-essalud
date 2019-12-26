@@ -1,0 +1,14 @@
+.MuiFormControl-root {
+    border: 0;
+    margin: 0;
+    display: inline-flex;
+    padding: 0;
+    position: relative;
+    min-width: 0;
+    flex-direction: column;
+    vertical-align: top;
+    width: 100%;
+}
+.MTableToolbar-searchField-38{
+    width: auto !important;
+}

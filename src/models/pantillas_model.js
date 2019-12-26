@@ -11,7 +11,7 @@ class PlantillasModel {
     plantilla5A12 = {
         'documento': '',
         'nombre': '',
-        'telefono': '',
+        'edad': '',
         '99205-1': '',
         '99205-2': '',
         'A0213-0': '',

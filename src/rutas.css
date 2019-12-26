@@ -11,6 +11,10 @@
 
 /* MIOS */
 
+.multi{
+    height: 300px !important;
+}
+
 .tabla1 {
     font-weight: normal;
     text-align: left;

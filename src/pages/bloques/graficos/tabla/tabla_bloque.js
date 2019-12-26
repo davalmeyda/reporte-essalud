@@ -20,6 +20,10 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
+// CSS PROPIO
+import './tabla_bloque.css'
+
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -41,64 +45,79 @@ const tableIcons = {
 };
 
 class TablaBloque extends Component {
+
+    state = {
+        columns: this.props.columns,
+        data: this.props.data,
+    }
+
     render() {
         return (
             <div style={{ maxWidth: "100%" }}>
                 <MaterialTable
                     icons={tableIcons}
-                    columns={[
-                        { title: "Documento", field: "documento" },
-                        { title: "Nombre", field: "nombre" },
-                        { title: "D0150-1", field: "D0150-1" },
-                        { title: "99401-1", field: "99401-2" }, 
-                        { title: "D0150-1", field: "D0150-3" },
-                        { title: "99401-1", field: "99401-4" }, 
-                        { title: "D0150-1", field: "D0150-5" },
-                        { title: "99401-1", field: "99401-6" }, 
-                        { title: "D0150-1", field: "D0150-7" },
-                        { title: "99401-1", field: "99401-8" },                        
-                    ]}
-                    data={[
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": (<button>Hola</button>) },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "SIVIRICHE SALAZAR DAREK FABRIZIO", 'D0150-1': 'OK', "99401-2": 'OK', 'D0150-3': 'OK', "99401-4": 'OK', 'D0150-5': 'OK', "99401-6": 'OK', 'D0150-7': 'OK', "99401-8": 'OK' },
-                        { documento: "74672635", nombre: "KEREN ALMEYDA", 'D0150-1': 'OK', "99401-1": 'OK' },
-                        { documento: "74672635", nombre: "DAVID MONTALVAN", 'D0150-1': 'OK', "99401-1": 'OK' },
-                        { documento: "74672635", nombre: "DAVID ALMEYDA", 'D0150-1': 'OK', "99401-1": 'OK' },
-                    ]}
-                    title="Niño de 5 a menos de 12 años"
+                    columns={this.state.columns}
+                    data={this.state.data}
+                    title={this.props.titulo}
+                    localization={
+                        {
+                            pagination: {
+                                firstAriaLabel: 'filas',
+                                firstTooltip: 'Incio',
+                                // labelDisplayedRows: 'filas3',
+                                labelRowsPerPage: 'filas4',
+                                labelRowsSelect: 'Filas',
+                                lastAriaLabel: 'filas6',
+                                lastTooltip: 'Ultimo',
+                                nextAriaLabel: 'filas8',
+                                nextTooltip: 'Siguiente',
+                                previousAriaLabel: 'fila10',
+                                previousTooltip: 'Atras',
+                            },
+                            toolbar: {
+                                searchPlaceholder: 'Buscar',
+                            },
+                            body: {
+                                deleteTooltip: 'Eliminar',
+                                editTooltip: 'Editar',
+                                editRow: {
+                                    deleteText: 'Esta seguro que desea eliminar el Procedimiento?',
+                                    cancelTooltip: 'Cancelar',
+                                    saveTooltip: 'Guardar'
+                                }
+                            }
+                        }
+                    }
+                    editable={{
+                        onRowUpdate: (newData, oldData) =>
+                            new Promise(resolve => {
+                                setTimeout(() => {
+                                    resolve();
+                                    if (oldData) {
+                                        this.setState(prevState => {
+                                            const editar = this.props.editar;
+                                            editar(oldData, newData);
+                                            const data = [...prevState.data];
+                                            data[data.indexOf(oldData)] = newData;
+                                            return { ...prevState, data };
+                                        });
+                                    }
+                                }, 600);
+                            }),
+                        onRowDelete: oldData =>
+                            new Promise(resolve => {
+                                setTimeout(() => {
+                                    resolve();
+                                    this.setState(prevState => {
+                                        const eliminar = this.props.eliminar;
+                                        eliminar(oldData);
+                                        const data = [...prevState.data];
+                                        data.splice(data.indexOf(oldData), 1);
+                                        return { ...prevState, data };
+                                    });
+                                }, 600);
+                            }),
+                    }}
                 />
             </div>
         );

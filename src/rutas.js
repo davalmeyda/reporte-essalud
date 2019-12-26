@@ -17,6 +17,7 @@ import ConfigBloque from './pages/bloques/segmentos/config_bloque';
 import SiderBarBloque from './pages/bloques/segmentos/siderbar_bloque';
 import InicioPage from './pages/inicio_page';
 import FooterBloque from './pages/bloques/segmentos/footer_bloque';
+import ConfiguracionPage from './pages/configuracion_page';
 
 
 import LoginProviders from './providers/login_provider';
@@ -88,6 +89,7 @@ class Rutas extends Component {
                                 <Switch>
                                     <Route exact path="/" component={InicioPage}></Route>
                                     <Route exact path="/Carteras" component={CarterasPage}></Route>
+                                    <Route exact path="/Configuracion" component={ConfiguracionPage}></Route>
                                     <Redirect to="/"></Redirect>
                                 </Switch>
                                 <FooterBloque></FooterBloque>
