@@ -2,27 +2,40 @@ import React, { Component } from 'react';
 
 import CarterasProviders from '../providers/carteras_provider';
 import TablaBloque from './bloques/graficos/tabla/tabla_bloque';
+import ConfiguracionProvider from '../providers/configuracion_provider';
 
 
 class CarterasPage extends Component {
     state = {
         pacientesSinCartera: 0,
         pacientesConCartera: 0,
+        todasCarteras: []
     }
     carterasProviders = new CarterasProviders();
+    cofiguracionProvider = new ConfiguracionProvider();    
+
+    refDiv = React.createRef();
 
     componentDidMount = async () => {
+
+        const todasCarteras = await this.cofiguracionProvider.traerTodasCarteras();
         const data = await this.carterasProviders.comparacionReporteCartera();
-        const data2 = await this.carterasProviders.llenarPlantilla(data[1]);
+        const data2 = await this.carterasProviders.llenarPlantilla(data[1], todasCarteras);
         const pacientesConCartera = data[1].length;
         const pacientesSinCartera = data[0].length;
         this.setState({
             pacientesConCartera,
-            pacientesSinCartera
+            pacientesSinCartera,
+            todasCarteras: data2,
         });
     }
 
+    ancho = {
+        maxWidth: this.aaaaaaaaa
+    }
+
     render() {
+
         return (
             <div className="app-main__inner">
                 <div className="app-page-title">
@@ -63,7 +76,7 @@ class CarterasPage extends Component {
                                     <div className="widget-heading">PACIENTES SIN CARTERA</div>
                                     <div className="divider divider-per"></div>
                                     <div className="widget-subheading">
-                                       SEGUN BASE DE DATOS
+                                        SEGUN BASE DE DATOS
                                     </div>
                                 </div>
                             </div>
@@ -93,14 +106,13 @@ class CarterasPage extends Component {
                     </div>
                     {/* --------- */}
                 </div>
-                <div className="main-card mb-3 card">
+                <div ref={this.refDiv} className="main-card mb-3 card">
                     <div className="card-body">
-                        <TablaBloque></TablaBloque>
+                        {this.state.todasCarteras.length > 0 ? <TablaBloque ancho={{ maxWidth: ((this.refDiv.current.clientWidth - 60) + 'px') }} columns={this.state.todasCarteras[0]['B1-F']} titulo='NIÑOS MENORES DE 1 AÑO'></TablaBloque> : 'cargando...'}
                     </div>
                 </div>
             </div>
         );
     }
 }
-
 export default CarterasPage;

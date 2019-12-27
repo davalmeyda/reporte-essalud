@@ -5,10 +5,8 @@ import dashboarProvider from './dashboard_provider';
 import HerramientasProviders from './herramientas_providers';
 import ConexionesProvider from './conexiones_provider';
 
-import PlantillasModel from '../models/pantillas_model';
-
 class CarterasProviders {
-    
+
     herramientasProviders = new HerramientasProviders();
     adminisionProvider = new dashboarProvider();
     conexionesProvider = new ConexionesProvider();
@@ -95,35 +93,14 @@ class CarterasProviders {
         resultado.push(noAtendidos);
         resultado.push(atendidosAgrupados);
 
-
         console.log(siAtendidos);
         console.log(noAtendidos);
-
-        // const siAtendidos2 = [];
-        // const noAtendidos2 = [];
-
-        // atendidosAgrupados.forEach(d => {
-        //     let agregado = false;
-        //     asegurados.forEach((x, i) => {
-        //         if (d[0]['NUM_DOC'] === x['NRO_DOC']) {
-        //             siAtendidos2.push(d);
-        //             agregado = true;
-        //         } else if (asegurados.length - 1 === i && !agregado) {
-        //             noAtendidos2.push(d);
-        //         }
-        //     })
-        // });
-
-        // console.log(siAtendidos2);
-        // console.log(noAtendidos2);
-
 
         return resultado;
     }
 
-    llenarPlantilla = async (data) => {
+    llenarPlantilla = async (data, todasCarteras) => {
 
-        
         const B1 = [];
         const B2 = [];
         const B3 = [];
@@ -133,39 +110,86 @@ class CarterasProviders {
         const C3 = [];
         const G1 = [];
 
+        const ll = (plantilla, d) => {
+            d.forEach(x => {
+                plantilla.documento = x['NUM_DOC'];
+                plantilla.nombre = x['APELLNOMBRE'];
+                plantilla.edad = x['EDAD'];
+                plantilla.sexo = x['SEXO'];
+                plantilla['FECHA_APERTURA'] = x['FECHA_APERTURA'];
+                plantilla[(x['COD_PROC'] + '-' + x['CONTROL'])] = 'ok';
+                plantilla[(x['COD_PROC'] + '-' + x['CONTROL'] + '-F')] = x['FECHORAREG'];
+            });
+        }
+
         // SEPARAMOS POR CARTERAS
         data.forEach(d => {
             if (d[0]['COD_CARTERA'] === 'B1') {
-                B1.push(d);
+                const plantilla = {};
+                ll(plantilla, d);
+                B1.push(plantilla);
             } else if (d[0]['COD_CARTERA'] === 'B2') {
-                B2.push(d);
-            } else if (d[0]['COD_CARTERA'] === 'B3') {                
-                const plantilla5A12 = new PlantillasModel().plantilla5A12;                
-                d.forEach(x => {
-                    plantilla5A12.documento = x['NUM_DOC'];
-                    plantilla5A12.nombre = x['APELLNOMBRE'];
-                    plantilla5A12.edad = x['EDAD'];
-                    plantilla5A12['FECHA_APERTURA'] = x['FECHA_APERTURA'];
-                    plantilla5A12[(x['COD_PROC'] + '-' + x['CONTROL'])]  = 'ok';
-                    plantilla5A12[(x['COD_PROC'] + '-' + x['CONTROL'] + '-F')]  = x['FECHORAREG'];
-                });
-                B3.push(plantilla5A12);
-
+                const plantilla = {};
+                ll(plantilla, d);
+                B2.push(plantilla);
+            } else if (d[0]['COD_CARTERA'] === 'B3') {
+                const plantilla = {};
+                ll(plantilla, d);
+                B3.push(plantilla);
             } else if (d[0]['COD_CARTERA'] === 'B4') {
-                B4.push(d);
+                const plantilla = {};
+                ll(plantilla, d);
+                B4.push(plantilla);
             } else if (d[0]['COD_CARTERA'] === 'C1') {
-                C1.push(d);
+                const plantilla = {};
+                ll(plantilla, d);
+                C1.push(plantilla);
             } else if (d[0]['COD_CARTERA'] === 'C2') {
-                C2.push(d);
+                const plantilla = {};
+                ll(plantilla, d);
+                C2.push(plantilla);
             } else if (d[0]['COD_CARTERA'] === 'C3') {
-                C3.push(d);
+                const plantilla = {};
+                ll(plantilla, d);
+                C3.push(plantilla);
             } else if (d[0]['COD_CARTERA'] === 'G1') {
-                G1.push(d);
+                const plantilla = {};
+                ll(plantilla, d);
+                G1.push(plantilla);
             }
         });
         const separado = { B1, B2, B3, B4, C1, C2, C3, G1 };
         console.log(separado);
 
+        const title = {
+            title: 'NOMBRE',
+            field: 'nombre'
+        }
+        const documento = {
+            title: 'DOCUMENTO',
+            field: 'documento'
+        }
+        const edad = {
+            title: 'EDAD',
+            field: 'edad'
+        }
+
+        // LLENAMOS PLANTILLAS
+        console.log(todasCarteras);
+        const aaa = {};
+        for (const key in todasCarteras) {
+            const bbb = []
+            for (const kk in todasCarteras[key]) {
+                const aa = {}
+                aa['title'] = kk;
+                aa['field'] = kk;
+                bbb.push(aa);
+            }
+            bbb.unshift(documento, title, edad);
+            aaa[key] = bbb;
+        }
+        console.log(aaa);
+        return [aaa, separado]
     }
 
 }

@@ -53,12 +53,15 @@ class TablaBloque extends Component {
 
     render() {
         return (
-            <div style={{ maxWidth: "100%" }}>
+            <div style={this.props.ancho}>
                 <MaterialTable
                     icons={tableIcons}
                     columns={this.state.columns}
                     data={this.state.data}
                     title={this.props.titulo}
+                    options={{
+                        
+                    }}
                     localization={
                         {
                             pagination: {
