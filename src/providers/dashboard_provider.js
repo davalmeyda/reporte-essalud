@@ -1,5 +1,5 @@
 import ConexionesProvider from './conexiones_provider';
-import HerramientasProviders from './herramientas_providers';
+import HerramientasProviders from './herramientas_provider';
 
 class dashboarProvider {
 

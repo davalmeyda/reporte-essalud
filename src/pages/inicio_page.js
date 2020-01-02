@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // IMPORTAR PROVIDERS
 import dashboarProvider from '../providers/dashboard_provider';
 import TimelineBloque from './bloques/graficos/timeline/timeline_bloque';
-import HerramientasProviders from '../providers/herramientas_providers';
+import HerramientasProvider from '../providers/herramientas_provider';
 
 // PDF
 import { PDFReader } from 'reactjs-pdf-reader';
@@ -14,7 +14,7 @@ class InicioPage extends Component {
         pdf: '',
     }
 
-    herramientasProvider = new HerramientasProviders();
+    herramientasProvider = new HerramientasProvider();
     dashboarProvider = new dashboarProvider();
 
     gadgetCitasPorServicios = async () => {

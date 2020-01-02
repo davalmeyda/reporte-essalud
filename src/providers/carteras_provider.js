@@ -2,7 +2,7 @@
 import papaparse from 'papaparse';
 // PROVIDERS
 import dashboarProvider from './dashboard_provider';
-import HerramientasProviders from './herramientas_providers';
+import HerramientasProviders from './herramientas_provider';
 import ConexionesProvider from './conexiones_provider';
 
 class CarterasProviders {
@@ -35,7 +35,7 @@ class CarterasProviders {
     }
 
     traerAtendidos = async (fechaInicio) => {
-        const fecha = this.herramientasProvider.fechaActual();
+        const fecha = this.herramientasProviders.fechaActual();
         const url = '/explotacionDatos/servlet/CtrlControl?opt=atenPrim_11_1_xls';
         const parametros = {
             CAS: 822,
