@@ -62,7 +62,8 @@ class dashboarProvider {
             formatoArchivo: 'xls',
             servicio: '00',
         }
-        return this.conexionesProvider._traerdatosExplota(parametros, url);
+        console.log(await this.conexionesProvider._traerdatosExplota(parametros, url));
+        return await this.conexionesProvider._traerdatosExplota(parametros, url);
     }
 
     programacionMedicos = async (fechaFin, fechaInicio) => {
@@ -81,7 +82,7 @@ class dashboarProvider {
 
     gadgetPacientesCitados = async () => {
 
-        let fecha = new Date(Date.now()).toLocaleDateString();
+        let fecha = this.herramientasProvider.fechaActual();
         // let fecha = '17/12/2019';
 
         // PRUEBAS CON PROGRAMACION        
@@ -112,7 +113,7 @@ class dashboarProvider {
 
     gadgetProgramacionMedicos = async () => {
 
-        let fecha = new Date(Date.now()).toLocaleDateString();
+        let fecha = this.herramientasProvider.fechaActual();
         const fff = new Date();
 
         let day = fff.getDate()

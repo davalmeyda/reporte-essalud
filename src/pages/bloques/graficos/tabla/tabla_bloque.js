@@ -60,7 +60,7 @@ class TablaBloque extends Component {
                     data={this.state.data}
                     title={this.props.titulo}
                     options={{
-                        
+
                     }}
                     localization={
                         {
@@ -91,7 +91,7 @@ class TablaBloque extends Component {
                             }
                         }
                     }
-                    editable={{
+                    editable={this.props.editable === true ? {
                         onRowUpdate: (newData, oldData) =>
                             new Promise(resolve => {
                                 setTimeout(() => {
@@ -120,7 +120,7 @@ class TablaBloque extends Component {
                                     });
                                 }, 600);
                             }),
-                    }}
+                    } : null}
                 />
             </div>
         );

@@ -35,7 +35,7 @@ class CarterasProviders {
     }
 
     traerAtendidos = async (fechaInicio) => {
-        const fecha = new Date(Date.now()).toLocaleDateString();
+        const fecha = this.herramientasProvider.fechaActual();
         const url = '/explotacionDatos/servlet/CtrlControl?opt=atenPrim_11_1_xls';
         const parametros = {
             CAS: 822,
@@ -56,7 +56,7 @@ class CarterasProviders {
     }
 
     comparacionReporteCartera = async () => {
-        let atendidos = await this.traerAtendidos('01/12/2019');
+        let atendidos = await this.traerAtendidos('01/10/2019');
         const asegurados = await this.traerAsegurados();
 
         // QUITAMOS LAS CARTERAS DE OTROS AÑOS        

@@ -30,12 +30,7 @@ class CarterasPage extends Component {
         });
     }
 
-    ancho = {
-        maxWidth: this.aaaaaaaaa
-    }
-
     render() {
-
         return (
             <div className="app-main__inner">
                 <div className="app-page-title">
@@ -108,7 +103,7 @@ class CarterasPage extends Component {
                 </div>
                 <div ref={this.refDiv} className="main-card mb-3 card">
                     <div className="card-body">
-                        {this.state.todasCarteras.length > 0 ? <TablaBloque ancho={{ maxWidth: ((this.refDiv.current.clientWidth - 60) + 'px') }} columns={this.state.todasCarteras[0]['B1-F']} titulo='NIÑOS MENORES DE 1 AÑO'></TablaBloque> : 'cargando...'}
+                        {this.state.todasCarteras.length > 0 ? <TablaBloque ancho={{ maxWidth: ((this.refDiv.current.clientWidth - 60) + 'px') }} data={this.state.todasCarteras[1]['B1']} columns={this.state.todasCarteras[0]['B1-F']} titulo='NIÑOS MENORES DE 1 AÑO'></TablaBloque> : 'cargando...'}
                     </div>
                 </div>
             </div>

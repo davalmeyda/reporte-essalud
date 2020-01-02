@@ -172,7 +172,7 @@ class ConfiguracionPage extends Component {
                         <form className='mt-3'>
                             <div className="form-row">
                                 <div className='col-md-8'>
-                                    {this.state.data.length === 0 ? <div>Cargando...</div> : <TablaBloque editar={this.editarProcedimiento} eliminar={this.eliminarProcedimiento} columns={this.columns} data={this.state.data} titulo={this.titulo}></TablaBloque>}
+                                    {this.state.data.length === 0 ? <div>Cargando...</div> : <TablaBloque editable={true} editar={this.editarProcedimiento} eliminar={this.eliminarProcedimiento} columns={this.columns} data={this.state.data} titulo={this.titulo}></TablaBloque>}
                                 </div>
                                 <div className='col-md-4'>
                                     <div className="ml-3">

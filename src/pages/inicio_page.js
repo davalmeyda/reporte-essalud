@@ -18,7 +18,9 @@ class InicioPage extends Component {
     dashboarProvider = new dashboarProvider();
 
     gadgetCitasPorServicios = async () => {
-        let fecha = new Date(Date.now()).toLocaleDateString();
+        let fecha = this.herramientasProvider.fechaActual();
+        console.log(fecha)
+        this.herramientasProvider.fechaActual();
         this.setState({
             citasPorServicios: await this.dashboarProvider.citasPorServicios(fecha, fecha),
         });
@@ -37,7 +39,7 @@ class InicioPage extends Component {
 
         let base64data;
         let data = '';
-        let fecha = new Date(Date.now()).toLocaleDateString();        
+        let fecha = this.herramientasProvider.fechaActual();        
         const blob = await this.dashboarProvider.obtenerPDFDiferimiento(fecha);
         var reader = new FileReader();
         reader.readAsDataURL(blob);

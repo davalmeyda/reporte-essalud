@@ -1,6 +1,25 @@
 class HerramientasProviders {
 
-    ordenarArray = (data, columna)=>{
+    // FUNCION QUE AGREGA CEROS AL INICIO
+    PadLeft(value, length) {
+        return (value.toString().length < length) ? this.PadLeft("0" + value, length) :
+            value;
+    }
+
+    fechaActual = () => {
+        let fechaActual = ''
+        const fecha = new Date(Date.now());
+
+        const dia = this.PadLeft(fecha.getDate(), 2);
+        const mes = this.PadLeft(fecha.getMonth() + 1, 2);
+        const año = fecha.getFullYear();
+
+        fechaActual = dia + '/' + mes + '/' + año
+        return fechaActual;
+    }
+
+
+    ordenarArray = (data, columna) => {
         data.sort((a, b) => {
             if (a[columna] > b[columna]) {
                 return 1;
@@ -29,7 +48,7 @@ class HerramientasProviders {
         let servicios = [];
         let servicio = "";
         let inicial = true;
-        array.forEach((x, i) => {            
+        array.forEach((x, i) => {
             if (x[columna] === servicio) {
                 servicios.push(x);
             } else {

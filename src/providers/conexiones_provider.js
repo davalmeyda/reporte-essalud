@@ -17,7 +17,10 @@ class ConexionesProvider {
             }).catch(function (error) {
                 console.log(error);
             });
-        const blob = resp.data;       
+
+        console.log(resp);
+
+        const blob = resp.data;
 
         return blob;
     }
